@@ -62,7 +62,7 @@
                     <ul class="sidebar-menu" id="nav-accordion">
 
                         <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-                        <h5 class="centered"><%= session.getAttribute("user")%> </h5>
+                        <h5 class="centered"><%= session.getAttribute("logFname") %> </h5>
 
 
 
