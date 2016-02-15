@@ -32,7 +32,10 @@ public class CreateSupplierServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        List<Supplier> supplierList = supplierManagementBean.findAllSuppliers();
+        request.setAttribute("supplierList", supplierList);
+        RequestDispatcher rd = request.getRequestDispatcher("list_suppliers.jsp");
+        rd.include(request, response);
     }
 
     @Override

@@ -76,6 +76,8 @@
                            
                           <li><a href="${pageContext.request.contextPath}/AddCategoryServlet">Categories</a></li>
                           
+                           <li><a href="${pageContext.request.contextPath}/CreateSupplierServlet">Suppliers</a></li>
+                          
                            
                          
                       </ul>
