@@ -1,6 +1,6 @@
 <%-- 
-    Document   : adminHome
-    Created on : Feb 10, 2016, 11:39:56 PM
+    Document   : list_customers
+    Created on : Feb 16, 2016, 8:22:24 PM
     Author     : nuzly
 --%>
 
@@ -50,7 +50,7 @@
                 
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                          <li><a class="logout" href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                         <li><a class="logout" href="${pageContext.request.contextPath}/logout">Logout</a></li>
                     </ul>
                 </div>
             </header>
@@ -60,13 +60,13 @@
             MAIN SIDEBAR MENU
             *********************************************************************************************************************************************************** -->
             <!--sidebar start-->
-              <aside>
+             <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-                  <h5 class="centered"><%= ((User)session.getAttribute("user")).getFirstName() %> </h5>
+              	  <h5 class="centered"><%= session.getAttribute("logFname") %> </h5>
               	  	
                 
 
@@ -79,6 +79,34 @@
                           <li> <a href="${pageContext.request.contextPath}/admin">Approval Requests</a></li>
                            
                           <li><a href="${pageContext.request.contextPath}/AddCategoryServlet">Categories</a></li>
+                          
+                           <li><a href="${pageContext.request.contextPath}/CreateSupplierServlet">Suppliers</a></li>
+                          
+                           
+                         
+                      </ul>
+                  </li>
+                  
+                   <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Items</span>
+                      </a>
+                      <ul class="sub">
+                          
+                           <li><a href="${pageContext.request.contextPath}/listitem">View Items</a></li>
+                         
+                      </ul>
+                  </li>
+                  
+                   <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Customers</span>
+                      </a>
+                      <ul class="sub">
+                          
+                           <li><a href="create_customer.jsp">Create Customers</a></li>
                          
                       </ul>
                   </li>
@@ -91,6 +119,7 @@
               <!-- sidebar menu end-->
           </div>
       </aside>
+         
             <!--sidebar end-->
 
             <!-- **********************************************************************************************************************************************************
@@ -99,7 +128,7 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i> Suppliers</h3>
+                    <h3><i class="fa fa-angle-right"></i> Categories</h3>
                     <div class="row">
 
                              
@@ -110,7 +139,7 @@
                             <div class="col-md-12">
                                 <div class="content-panel">
                                     <ul class="sub">
-                                <li><a  href="create_supplier.jsp">Add Supplier</a></li>
+                                <li><a  href="create_customer.jsp">Add Customer</a></li>
                                 
                             </ul>
                                     <table class="table table-striped table-advance table-hover">
@@ -118,10 +147,11 @@
                                         <hr>
                                         <thead>
                                             <tr>
-                                                <th><i class="fa fa-bookmark"></i>id</th>
-                                                <th><i class="fa fa-bookmark"></i>Company Name</th>
-                                                <th><i class="fa fa-bookmark"></i> Supplier Name</th>
-                                                 <th><i class="fa fa-bullhorn"></i> Supplier Email</th>
+                                                <th><i class="fa fa-bullhorn"></i>First Name</th>
+                                                <th><i class="fa fa-bookmark"></i> Last Name</th>
+                                                <th><i class="fa fa-bookmark"></i> Address</th>
+                                                <th><i class="fa fa-bookmark"></i> Phone</th>
+                                                <th><i class="fa fa-bookmark"></i> Email</th>
 
                                                 <th></th>
                                             </tr>
@@ -129,17 +159,18 @@
                                         <tbody>
                                         <form action="EditCategoryServlet" method="get" > 
                                             <input type="hidden" value="EDIT" name="fromList">
-                                            <c:forEach var="supplier" items="${supplierList}">
+                                            <c:forEach var="cust" items="${customerList}">
                                                 <tr>
-                                                    <td class="hidden-phone"><c:out value="${supplier.id}" /></td>
-                                                    <td><a href="basic_table.html#"><c:out value="${supplier.compName}" /></a></td>
-                                                    <td class="hidden-phone"><c:out value="${supplier.contactFname}" /></td>
-                                                      <td class="hidden-phone"><c:out value="${supplier.compEmail}" /></td>
+                                                    <td><a href="basic_table.html#"><c:out value="${cust.firstName}" /></a></td>
+                                                    <td class="hidden-phone"><c:out value="${cust.lastName}" /></td>
+                                                     <td class="hidden-phone"><c:out value="${cust.address}" /></td>
+                                                      <td class="hidden-phone"><c:out value="${cust.phoneNo}" /></td>
+                                                       <td class="hidden-phone"><c:out value="${cust.email}" /></td>
                                                    
 
                                                     <td>
                                                         
-                                                        <button name="editCategory"  class="btn btn-primary btn-xs" value="${supplier.id}"><i class="fa fa-pencil" ></i></button>
+                                                        <button name="editCust"  class="btn btn-primary btn-xs" value="${cust.id}"><i class="fa fa-pencil" ></i></button>
                                                        
                                                    </td>
                                                 </tr>
@@ -191,4 +222,5 @@
 
     </body>
 </html>
+
 

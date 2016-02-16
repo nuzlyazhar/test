@@ -94,6 +94,18 @@
                          
                       </ul>
                   </li>
+                  
+                   <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Customers</span>
+                      </a>
+                      <ul class="sub">
+                          
+                           <li><a href="create_customer.jsp">Create Customers</a></li>
+                         
+                      </ul>
+                  </li>
 
           
                

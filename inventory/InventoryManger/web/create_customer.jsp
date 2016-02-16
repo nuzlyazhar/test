@@ -93,76 +93,48 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i> Add Supplier</h3>
+                    <h3><i class="fa fa-angle-right"></i> Add Customer</h3>
 
                     <!-- BASIC FORM ELELEMNTS -->
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="form-panel">
-                                <h4 class="mb"><i class="fa fa-angle-right"></i> Add Supplier</h4>
-                                <form class="form-horizontal style-form" method="post" action="CreateSupplierServlet">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Add Customer</h4>
+                                <form class="form-horizontal style-form" method="post" action="CreateCustomerServlet">
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Company Name</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">First Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="cname">
+                                            <input type="text" class="form-control" name="cufname">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Contact First Name</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="cfname">
+                                            <input type="text" class="form-control" name="culname">
+                                        </div>
+                                    </div>
+
+                                     <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Address</label>
+                                        <div class="col-sm-10">
+                                            <textarea type="text" class="form-control" name="cuadd"></textarea>
+                                        </div>
+                                    </div>  
+                                      <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
+                                        <div class="col-sm-10">
+                                            <input type="tel" class="form-control" name="cuphone">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Contact Last Name</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="clname">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Company Address</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="caddress">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Company Phone</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="cphone">
+                                            <input type="email" class="form-control" name="cuemail">
                                         </div>
                                     </div>  
                                     
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Company Fax</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="cfax">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Company Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email" name="cemail">
-                                        </div>
-                                    </div>
-                                    
-                               <div class="form-group">
-                                   <label class="col-sm-2 col-sm-2 control-label">Payment Method</label>
-                                 <div class="radio" >
-						  
-						    <input type="radio" name="paym" id="optionsRadios1" value="CASH" checked>
-						    Cash
-						  
-						</div>
-                               
-						<div class="radio" style="padding-left:13.5em"> 
-                                                    <input type="radio" name="paym" id="optionsRadios2" value="CHEQUE" >
-						    Cheque
-						  
-						</div>
-                                         </div>
+                              
                                     <button type="submit" class="btn btn-theme" >Save</button>
                                 </form>
                             </div>
