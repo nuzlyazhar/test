@@ -60,13 +60,13 @@
             MAIN SIDEBAR MENU
             *********************************************************************************************************************************************************** -->
             <!--sidebar start-->
-              <aside>
+                <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-                  <h5 class="centered"><%= ((User)session.getAttribute("user")).getFirstName() %> </h5>
+              	  <h5 class="centered"><%= session.getAttribute("logFname") %> </h5>
               	  	
                 
 
@@ -79,6 +79,34 @@
                           <li> <a href="${pageContext.request.contextPath}/admin">Approval Requests</a></li>
                            
                           <li><a href="${pageContext.request.contextPath}/AddCategoryServlet">Categories</a></li>
+                          
+                           <li><a href="${pageContext.request.contextPath}/CreateSupplierServlet">Suppliers</a></li>
+                          
+                           
+                         
+                      </ul>
+                  </li>
+                  
+                   <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Items</span>
+                      </a>
+                      <ul class="sub">
+                          
+                           <li><a href="${pageContext.request.contextPath}/listitem">View Items</a></li>
+                         
+                      </ul>
+                  </li>
+                  
+                   <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Customers</span>
+                      </a>
+                      <ul class="sub">
+                          
+                           <li><a href="create_customer.jsp">Create Customers</a></li>
                          
                       </ul>
                   </li>
