@@ -42,7 +42,7 @@ public class ItemManagementBean {
 
     }
 
-    public List<Item> searchItem(Item item) {
+    public List<Item> searchItems(Item item) {
 
         TypedQuery<Item> query = em.createQuery("SELECT i FROM Item i WHERE UPPER(i.itemName) LIKE :keyword ORDER BY i.itemName", Item.class);
         query.setParameter("keyword", "%" + item.getItemName().toUpperCase() + "%");
@@ -50,5 +50,16 @@ public class ItemManagementBean {
         return itemResults;
 
     }
+    
+      public Item searchItemByName(String itemName) {
+
+        TypedQuery<Item> query = em.createNamedQuery("Item.findByItemName", Item.class);
+        query.setParameter("itemName", itemName);
+        Item itemResults = query.getSingleResult();
+        return itemResults;
+
+    }
+      
+      
 
 }

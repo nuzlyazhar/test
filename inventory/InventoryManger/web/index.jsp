@@ -91,6 +91,7 @@
                       <ul class="sub">
                           
                            <li><a href="${pageContext.request.contextPath}/listitem">View Items</a></li>
+                           <li><a href="${pageContext.request.contextPath}/AddStockServlet">Add Stock</a></li>
                          
                       </ul>
                   </li>
