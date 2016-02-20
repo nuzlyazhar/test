@@ -186,7 +186,7 @@
                                          <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">New Stock</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="control-label" name="newstock">
+                                            <input type="number" class="control-label" name="newstock" min="1">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-theme" >Update</button>
