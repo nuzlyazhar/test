@@ -70,6 +70,7 @@ public class CreateOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String orderItem = request.getParameter("orderItem");
+
         System.out.println("submit button :" + orderItem);
         if (null == orderItem) {
             Map<String, String> queryParameters = new HashMap<String, String>();
@@ -91,51 +92,12 @@ public class CreateOrderServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("create_order.jsp");
             rd.include(request, response);
         } else {
-            
+
             Item item = itemManagementBean.getItemById(orderItem);
             request.setAttribute("orderItem", item);
-            String noOfUnits = request.getParameter("noOfUnits");
-            HttpSession session = request.getSession(true);
-            if(null == session.getAttribute("sessionOrder")){
-                Order order = new Order();
-                order.setOrderDate(Calendar.getInstance().getTime());
-                order.setStaffId((User) session.getAttribute("user"));
-                
-                //create order detail
-                OrderDetail od = new OrderDetail();
-                od.setOrderDate(Calendar.getInstance().getTime());
-                od.setItemId(item);
-                od.setOrderId(order);
-                od.setUnitPrice(item.getUnitPrice());
-                od.setTotal(od.getUnitPrice().multiply(new BigDecimal(noOfUnits)));
-                od.setBillId(1111);
-                List<OrderDetail> odList= new ArrayList<>();
-                odList.add(od);
-                order.setOrderDetailCollection(odList);
-                session.setAttribute("sessionOrder", order);
-                
-                
-                
-            }else{
-            
-            Order existingOrder = (Order) session.getAttribute("sessionOrder");
-            //create order detail
-                OrderDetail od = new OrderDetail();
-                od.setOrderDate(Calendar.getInstance().getTime());
-                od.setItemId(item);
-                od.setOrderId(existingOrder);
-                od.setUnitPrice(item.getUnitPrice());
-                od.setTotal(od.getUnitPrice().multiply(new BigDecimal(noOfUnits)));
-                od.setBillId(11411);
-                existingOrder.getOrderDetailCollection().add(od);
-                session.setAttribute("sessionOrder", existingOrder);
-            
-            }
-            
-            
-            RequestDispatcher rd = request.getRequestDispatcher("order_overview.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("consume_item.jsp");
             rd.include(request, response);
-            
+
         }
     }
 

@@ -41,92 +41,9 @@
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
       <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.html" class="logo"><b>Inventory Control System</b></a>
-            <!--logo end-->
-            
-            <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="${pageContext.request.contextPath}/logout">Logout</a></li>
-            	</ul>
-            </div>
-        </header>
+     <jsp:include page="header.jsp" />
    
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-              
-              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered"><%= session.getAttribute("logFname") %> </h5>
-              	  	
-                
-
-                  <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>Admin Function</span>
-                      </a>
-                      <ul class="sub">
-                          <li> <a href="${pageContext.request.contextPath}/admin">Approval Requests</a></li>
-                           
-                          <li><a href="${pageContext.request.contextPath}/AddCategoryServlet">Categories</a></li>
-                          
-                           <li><a href="${pageContext.request.contextPath}/CreateSupplierServlet">Suppliers</a></li>
-                          
-                           
-                         
-                      </ul>
-                  </li>
-                  
-                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>Items</span>
-                      </a>
-                      <ul class="sub">
-                          
-                           <li><a href="${pageContext.request.contextPath}/listitem">View Items</a></li>
-                           <li><a href="${pageContext.request.contextPath}/AddStockServlet">Add Stock</a></li>
-                         
-                      </ul>
-                  </li>
-                  
-                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>Customers</span>
-                      </a>
-                      <ul class="sub">
-                          
-                           <li><a href="create_customer.jsp">Create Customers</a></li>
-                         
-                      </ul>
-                  </li>
-                     <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>Orders</span>
-                      </a>
-                      <ul class="sub">
-                          
-                           <li><a href="${pageContext.request.contextPath}/CreateOrderServlet">Create Orders</a></li>
-                         
-                      </ul>
-                  </li>
-
-          
-               
-            
-
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
-      </aside>
+      <jsp:include page="side_bar.jsp" />
       <!--sidebar end-->
       
       <!-- **********************************************************************************************************************************************************
@@ -289,16 +206,7 @@
 
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer">
-          <div class="text-center">
-              2014 - Alvarez.is
-              <a href="general.html#" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
-          </div>
-      </footer>
-      <!--footer end-->
-  </section>
+      <jsp:include page="footer.jsp"/>
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>

@@ -4,7 +4,6 @@
     Author     : nuzly
 --%>
 
-<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +38,9 @@
             <!-- **********************************************************************************************************************************************************
             TOP BAR CONTENT & NOTIFICATIONS
             *********************************************************************************************************************************************************** -->
-            <jsp:include page="header.jsp" />
+         <jsp:include page="header.jsp" />
    
-            <jsp:include page="side_bar.jsp" />
+         <jsp:include page="side_bar.jsp" />
 
             <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
@@ -49,7 +48,7 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i> Categories</h3>
+                    <h3><i class="fa fa-angle-right"></i>Order Overview</h3>
                     <div class="row">
 
                              
@@ -60,7 +59,7 @@
                             <div class="col-md-12">
                                 <div class="content-panel">
                                     <ul class="sub">
-                                <li><a  href="create_category.jsp">Add Category</a></li>
+                               <li><a href="${pageContext.request.contextPath}/CreateItemServlet">Add more</a></li>
                                 
                             </ul>
                                     <table class="table table-striped table-advance table-hover">
@@ -68,8 +67,11 @@
                                         <hr>
                                         <thead>
                                             <tr>
-                                                <th><i class="fa fa-bullhorn"></i>Category Name</th>
-                                                <th><i class="fa fa-bookmark"></i> Category Description</th>
+                                                <th><i class="fa fa-bullhorn"></i>Item Name</th>
+                                                <th><i class="fa fa-bookmark"></i> Item Description</th>
+                                                <th><i class="fa fa-bookmark"></i> Unit Price</th>
+                                                <th><i class="fa fa-bookmark"></i> Units Ordered</th>
+                                                <th><i class="fa fa-bookmark"></i> Sub total</th>
 
                                                 <th></th>
                                             </tr>
@@ -77,15 +79,18 @@
                                         <tbody>
                                         <form action="EditCategoryServlet" method="get" > 
                                             <input type="hidden" value="EDIT" name="fromList">
-                                            <c:forEach var="category" items="${categoryList}">
+                                            <c:forEach var="od" items="${sessionScope.sessionOrder.orderDetailCollection}">
                                                 <tr>
-                                                    <td><a href="basic_table.html#"><c:out value="${category.catName}" /></a></td>
-                                                    <td class="hidden-phone"><c:out value="${category.catDescription}" /></td>
+                                                    <td><a href="basic_table.html#"><c:out value="${od.itemId.itemName}" /></a></td>
+                                                    <td class="hidden-phone"><c:out value="${od.itemId.itemDescription}" /></td>
+                                                    <td class="hidden-phone"><c:out value="${od.itemId.unitPrice}" /></td>
+                                                    <td class="hidden-phone"><c:out value="${od.orderQantity}" /></td>
+                                                    <td class="hidden-phone"><c:out value="${od.total}" /></td>
                                                    
 
                                                     <td>
                                                         
-                                                        <button name="editCategory"  class="btn btn-primary btn-xs" value="${category.id}"><i class="fa fa-pencil" ></i></button>
+                                                        <button name="editItem"  class="btn btn-primary btn-xs" value="${od.itemId.id}"><i class="fa fa-pencil" ></i></button>
                                                        
                                                    </td>
                                                 </tr>
@@ -104,7 +109,7 @@
             <!--footer start-->
             <jsp:include page="footer.jsp" />
    
-      <jsp:include page="side_bar.jsp" />
+      
             <!--footer end-->
         </section>
 
