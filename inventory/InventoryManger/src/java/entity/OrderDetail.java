@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -52,11 +53,11 @@ public class OrderDetail implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "unit_price")
-    private long unitPrice;
+    private BigDecimal unitPrice;
     @Column(name = "order_qantity")
     private Integer orderQantity;
     @Column(name = "total")
-    private Long total;
+    private BigDecimal total;
     @Column(name = "delivery_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deliveryDate;
@@ -77,7 +78,7 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-    public OrderDetail(Integer id, int billId, long unitPrice) {
+    public OrderDetail(Integer id, int billId, BigDecimal unitPrice) {
         this.id = id;
         this.billId = billId;
         this.unitPrice = unitPrice;
@@ -99,11 +100,11 @@ public class OrderDetail implements Serializable {
         this.billId = billId;
     }
 
-    public long getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(long unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -115,11 +116,11 @@ public class OrderDetail implements Serializable {
         this.orderQantity = orderQantity;
     }
 
-    public Long getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(Long total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 

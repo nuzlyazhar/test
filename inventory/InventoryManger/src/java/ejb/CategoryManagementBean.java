@@ -38,4 +38,9 @@ public class CategoryManagementBean {
      Category category= em.createNamedQuery("Category.findById", Category.class).setParameter("id", id).getSingleResult();
      return category;
     }
+    
+     public Category findCategoryByName(Integer catName){
+     Category category= em.createNamedQuery("Category.findByCatName", Category.class).setParameter("catName", catName).getSingleResult();
+     return category;
+    }
 }

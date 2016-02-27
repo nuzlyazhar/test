@@ -33,4 +33,8 @@ public class SupplierManagementBean {
                 
     
     }
+    
+    public Supplier findSupplierByName(String name){
+       return em.createNamedQuery("Supplier.findByCompName", Supplier.class).setParameter("compName", name).getSingleResult();
+    }
 }

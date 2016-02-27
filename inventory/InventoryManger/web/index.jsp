@@ -107,6 +107,17 @@
                          
                       </ul>
                   </li>
+                     <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Orders</span>
+                      </a>
+                      <ul class="sub">
+                          
+                           <li><a href="${pageContext.request.contextPath}/CreateOrderServlet">Create Orders</a></li>
+                         
+                      </ul>
+                  </li>
 
           
                
@@ -130,12 +141,12 @@
       				<div class="showback">
       					<h4><i class="fa fa-angle-right"></i> Basic Progress Bars</h4>
 	      				<div class="progress">
-						  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+						  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
 						    <span class="sr-only">40% Complete (success)</span>
 						  </div>
 						</div>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+						  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
 						    <span class="sr-only">20% Complete</span>
 						  </div>
 						</div>
