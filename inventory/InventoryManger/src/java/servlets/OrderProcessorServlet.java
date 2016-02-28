@@ -32,60 +32,63 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "OrderProcessorServlet", urlPatterns = {"/OrderProcessorServlet"})
 public class OrderProcessorServlet extends HttpServlet {
-    
+
     @EJB
     OrderProcessorBean orderProcessorBean;
-    
+
     @EJB
     CustomerManagementBean customerManagementBean;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
+        List<Order> orderHistory = orderProcessorBean.findAll("orderDate");
+        request.setAttribute("orderHistory", orderHistory);
+        RequestDispatcher rd = request.getRequestDispatcher("order_history.jsp");
+        rd.include(request, response);
+
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String orderItemId = request.getParameter("removeItem");
-         String confirmOrder = request.getParameter("confirm_order");
-        if(null != orderItemId){
+        String confirmOrder = request.getParameter("confirm_order");
+        if (null != orderItemId) {
             HttpSession session = request.getSession();
             Order order = (Order) session.getAttribute("sessionOrder");
             Collection<OrderDetail> orderDetils = order.getOrderDetailCollection();
             Iterator<OrderDetail> it = orderDetils.iterator();
-            while(it.hasNext()){
-                OrderDetail od= it.next();
-                if(od.getItemId().getId().equals(Integer.parseInt(orderItemId))){
+            while (it.hasNext()) {
+                OrderDetail od = it.next();
+                if (od.getItemId().getId().equals(Integer.parseInt(orderItemId))) {
                     it.remove();
                 }
             }
             session.setAttribute("sessionOrder", order);
             RequestDispatcher rd = request.getRequestDispatcher("order_overview.jsp");
             rd.include(request, response);
-        
-        }
-        else if (null != confirmOrder) {
+
+        } else if (null != confirmOrder) {
             String customerId = request.getParameter("customerList");
             HttpSession session = request.getSession();
             Order order = (Order) session.getAttribute("sessionOrder");
             Customer cus = customerManagementBean.findById(getCustomerId(customerId));
             order.setCustomerId(cus);
-            
+
             User user = (User) session.getAttribute("user");
             order.setStaffId(user);
             orderProcessorBean.processOrder(order);
 
         }
-        
+
     }
 
-    private static String getCustomerId(String value){
+    private static String getCustomerId(String value) {
         String[] cus = value.split("-");
         return cus[0].trim();
-    
+
     }
 
 }

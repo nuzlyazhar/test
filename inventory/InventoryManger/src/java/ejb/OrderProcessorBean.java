@@ -8,6 +8,7 @@ package ejb;
 import entity.Item;
 import entity.Order;
 import entity.OrderDetail;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,6 +44,11 @@ public class OrderProcessorBean {
 
         }
 
+    }
+
+    public List<Order> findAll(String orderBy) {
+        List<Order> orderList = em.createQuery("SELECT o FROM Order o order by o." + orderBy, Order.class).getResultList();
+        return orderList;
     }
 
 }

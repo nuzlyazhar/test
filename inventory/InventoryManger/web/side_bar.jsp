@@ -63,6 +63,7 @@
                       <ul class="sub">
                           
                            <li><a href="${pageContext.request.contextPath}/CreateOrderServlet">Create Orders</a></li>
+                           <li><a href="${pageContext.request.contextPath}/OrderProcessorServlet">Order History</a></li>
                          
                       </ul>
                   </li>

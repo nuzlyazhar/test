@@ -104,7 +104,7 @@
             <!--footer start-->
             <jsp:include page="footer.jsp" />
    
-      <jsp:include page="side_bar.jsp" />
+
             <!--footer end-->
         </section>
 
