@@ -19,10 +19,10 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class OrderProcessorBean {
-    
+
     @PersistenceContext
     EntityManager em;
-    
+
     @EJB
     ItemManagementBean itemManagementBean;
 
@@ -30,32 +30,19 @@ public class OrderProcessorBean {
         Order ord = em.merge(order);
         return ord;
     }
-    
-    public void processOrder(Order order){
-    
-         for(OrderDetail od : order.getOrderDetailCollection()){
-         Item i = od.getItemId();
-            i.setUnitsInOrder(i.getUnitsInOrder()+od.getOrderQantity());
+
+    public void processOrder(Order order) {
+
+        for (OrderDetail od : order.getOrderDetailCollection()) {
+            Item i = od.getItemId();
+            i.setUnitsInOrder(i.getUnitsInOrder() + od.getOrderQantity());
             i.setUnitsInStock(i.getUnitsInStock() - od.getOrderQantity());
-            itemManagementBean.createItem(i); 
+            itemManagementBean.createItem(i);
             od.setItemId(i);
             createOrder(order);
-         
-         }
-   
-    
-       
-        
-        
-   
-    }
-    
-    
-    
 
-    
-     
-    
-   
+        }
+
+    }
 
 }
