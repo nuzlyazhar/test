@@ -76,7 +76,7 @@ public class OrderProcessorServlet extends HttpServlet {
             
             User user = (User) session.getAttribute("user");
             order.setStaffId(user);
-            orderProcessorBean.createOrder(order);
+            orderProcessorBean.processOrder(order);
 
         }
         

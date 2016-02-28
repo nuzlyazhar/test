@@ -5,7 +5,10 @@
  */
 package ejb;
 
+import entity.Item;
 import entity.Order;
+import entity.OrderDetail;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,10 +22,40 @@ public class OrderProcessorBean {
     
     @PersistenceContext
     EntityManager em;
+    
+    @EJB
+    ItemManagementBean itemManagementBean;
 
     public Order createOrder(Order order) {
         Order ord = em.merge(order);
         return ord;
     }
+    
+    public void processOrder(Order order){
+    
+         for(OrderDetail od : order.getOrderDetailCollection()){
+         Item i = od.getItemId();
+            i.setUnitsInOrder(i.getUnitsInOrder()+od.getOrderQantity());
+            i.setUnitsInStock(i.getUnitsInStock() - od.getOrderQantity());
+            itemManagementBean.createItem(i); 
+            od.setItemId(i);
+            createOrder(order);
+         
+         }
+   
+    
+       
+        
+        
+   
+    }
+    
+    
+    
+
+    
+     
+    
+   
 
 }
