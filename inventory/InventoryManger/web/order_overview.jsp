@@ -25,11 +25,7 @@
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/style-responsive.css" rel="stylesheet">
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+
     </head>
 
     <body>
@@ -38,9 +34,9 @@
             <!-- **********************************************************************************************************************************************************
             TOP BAR CONTENT & NOTIFICATIONS
             *********************************************************************************************************************************************************** -->
-         <jsp:include page="header.jsp" />
-   
-         <jsp:include page="side_bar.jsp" />
+            <jsp:include page="header.jsp" />
+
+            <jsp:include page="side_bar.jsp" />
 
             <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
@@ -51,7 +47,7 @@
                     <h3><i class="fa fa-angle-right"></i>Order Overview</h3>
                     <div class="row">
 
-                             
+
 
 
 
@@ -59,25 +55,37 @@
                             <div class="col-md-12">
                                 <div class="content-panel">
                                     <ul class="sub">
-                               <li><a href="${pageContext.request.contextPath}/CreateItemServlet">Add more</a></li>
-                                
-                            </ul>
-                                    <table class="table table-striped table-advance table-hover">
-                                        
-                                        <hr>
-                                        <thead>
-                                            <tr>
-                                                <th><i class="fa fa-bullhorn"></i>Item Name</th>
-                                                <th><i class="fa fa-bookmark"></i> Item Description</th>
-                                                <th><i class="fa fa-bookmark"></i> Unit Price</th>
-                                                <th><i class="fa fa-bookmark"></i> Units Ordered</th>
-                                                <th><i class="fa fa-bookmark"></i> Sub total</th>
+                                        <li><a href="${pageContext.request.contextPath}/CreateItemServlet">Add more</a></li>
 
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <form action="EditCategoryServlet" method="get" > 
+                                    </ul>
+                                    <form action="OrderProcessorServlet" method="post" > 
+                                         <div class="form-group">
+                                            <label class="sr-only" for="category">Supplier</label>
+                                            <input width="20%" required="true" type="text" class="form-control" list="customerList" id="cusId" name="customerList" placeholder="Enter Customer" autocomplete="off">
+
+                                            <datalist  name="customerList" id="customerList" >
+                                                <c:forEach items="${sessionScope.customers}" var="cus" >
+                                                    <option value="${cus.id} - ${cus.firstName}">${cus.id}</option>
+
+                                                </c:forEach>
+                                            </datalist>
+                                        </div>
+                                        <table class="table table-striped table-advance table-hover">
+
+                                            <hr>
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fa fa-bullhorn"></i>Item Name</th>
+                                                    <th><i class="fa fa-bookmark"></i> Item Description</th>
+                                                    <th><i class="fa fa-bookmark"></i> Unit Price</th>
+                                                    <th><i class="fa fa-bookmark"></i> Units Ordered</th>
+                                                    <th><i class="fa fa-bookmark"></i> Sub total</th>
+
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
                                             <input type="hidden" value="EDIT" name="fromList">
                                             <c:forEach var="od" items="${sessionScope.sessionOrder.orderDetailCollection}">
                                                 <tr>
@@ -86,18 +94,21 @@
                                                     <td class="hidden-phone"><c:out value="${od.itemId.unitPrice}" /></td>
                                                     <td class="hidden-phone"><c:out value="${od.orderQantity}" /></td>
                                                     <td class="hidden-phone"><c:out value="${od.total}" /></td>
-                                                   
+
 
                                                     <td>
-                                                        
-                                                        <button name="editItem"  class="btn btn-primary btn-xs" value="${od.itemId.id}"><i class="fa fa-pencil" ></i></button>
-                                                       
-                                                   </td>
+
+                                                        <button name="removeItem"  id="removeItem" class="btn btn-danger btn-xs" value="${od.itemId.id}"><i class="fa  fa-trash-o" ></i></button>
+
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
-                                        </form>
-                                        </tbody>
+                                    </form>
+
+                                    </tbody>
                                     </table>
+                                    <button type="submit" id="confirm_order" name="confirm_order"   value="confirm_order" class="btn btn-success btn-sm" name="addToOrder">Confirm</button>
+
                                 </div><!-- /content-panel -->
                             </div><!-- /col-md-12 -->
                         </div><!-- /row -->
@@ -108,8 +119,8 @@
             <!--main content end-->
             <!--footer start-->
             <jsp:include page="footer.jsp" />
-   
-      
+
+
             <!--footer end-->
         </section>
 

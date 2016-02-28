@@ -27,13 +27,7 @@
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/style-responsive.css" rel="stylesheet">
 
-        <script>
-
-            $(document).ready(function () {
-
-
-            });
-        </script>
+       
     </head>
 
     <body>
@@ -52,7 +46,7 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i> Consume Items</h3>
+                    <h3><i class="fa fa-angle-right"></i> Consume Item</h3>
 
                     <!-- BASIC FORM ELELEMNTS -->
 

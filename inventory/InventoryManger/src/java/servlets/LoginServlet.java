@@ -5,10 +5,13 @@
  */
 package servlets;
 
+import ejb.CustomerManagementBean;
 import ejb.UserManagementBean;
+import entity.Customer;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +30,9 @@ public class LoginServlet extends HttpServlet {
 
     @EJB
     UserManagementBean userManagementBean;
-
+    
+    @EJB
+    CustomerManagementBean customerManagementBean;
   
 
     
@@ -53,6 +58,7 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("loguname");
         String password = request.getParameter("logpassword");
         User u = userManagementBean.findByUsername(userName);
+        List<Customer> customers = customerManagementBean.findAll();
         if (null != u && null != password) {
 
             if (userManagementBean.validateUser(u, password)) {
@@ -62,6 +68,7 @@ public class LoginServlet extends HttpServlet {
                 if (session != null) {
                     session.setAttribute("user", u);
                     session.setAttribute("logFname", u.getFirstName());
+                    session.setAttribute("customers", customers);
                 }
                 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 rd.include(request, response);

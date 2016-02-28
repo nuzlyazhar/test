@@ -30,7 +30,7 @@ import javax.validation.constraints.NotNull;
  * @author nuzly
  */
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ORDER_TABLE")
 @NamedQueries({
     @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
     @NamedQuery(name = "Order.findById", query = "SELECT o FROM Order o WHERE o.id = :id"),

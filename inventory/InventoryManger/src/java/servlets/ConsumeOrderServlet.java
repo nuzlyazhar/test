@@ -6,7 +6,7 @@
 package servlets;
 
 import ejb.CategoryManagementBean;
-import ejb.CreateOrderBean;
+import ejb.OrderProcessorBean;
 import ejb.ItemManagementBean;
 import ejb.SupplierManagementBean;
 import entity.Item;
@@ -14,10 +14,10 @@ import entity.Order;
 import entity.OrderDetail;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -36,7 +36,7 @@ import javax.servlet.http.HttpSession;
 public class ConsumeOrderServlet extends HttpServlet {
 
     @EJB
-    CreateOrderBean createOrderBean;
+    OrderProcessorBean createOrderBean;
 
     @EJB
     ItemManagementBean itemManagementBean;
@@ -59,11 +59,11 @@ public class ConsumeOrderServlet extends HttpServlet {
         String orderItem = request.getParameter("addToOrder");
         Item item = itemManagementBean.getItemById(orderItem);
         request.setAttribute("orderItem", item);
-        
+
         String noOfUnits = request.getParameter("noOfUnits");
         HttpSession session = request.getSession(true);
         if (null == session.getAttribute("sessionOrder") && noOfUnits != null) {
-            
+
             Order order = new Order();
             order.setOrderDate(Calendar.getInstance().getTime());
             order.setStaffId((User) session.getAttribute("user"));
@@ -88,21 +88,40 @@ public class ConsumeOrderServlet extends HttpServlet {
 
             Order existingOrder = (Order) session.getAttribute("sessionOrder");
             //create order detail
+            //check if item exist and add.
             OrderDetail od = new OrderDetail();
             od.setOrderDate(Calendar.getInstance().getTime());
             od.setItemId(item);
+            od.setOrderQantity(Integer.parseInt(noOfUnits));
+            boolean isCOnsolidated = consolidateOrder(existingOrder.getOrderDetailCollection(),od);
             od.setOrderId(existingOrder);
             od.setUnitPrice(item.getUnitPrice());
+            
+            od.setBillId(11411);
+            if(!isCOnsolidated){
             od.setOrderQantity(Integer.parseInt(noOfUnits));
             od.setTotal(od.getUnitPrice().multiply(new BigDecimal(noOfUnits)));
-            od.setBillId(11411);
             existingOrder.getOrderDetailCollection().add(od);
+            }
             session.setAttribute("sessionOrder", existingOrder);
             RequestDispatcher rd = request.getRequestDispatcher("order_overview.jsp");
             rd.include(request, response);
 
         }
 
+    }
+
+    private static boolean consolidateOrder(Collection<OrderDetail> orders, OrderDetail order) {
+        boolean isCOnsolidated = false;
+        for (OrderDetail od : orders) {
+            if(od.getItemId().getId().equals(order.getItemId().getId())){
+                Integer newNumberOfUnits = order.getOrderQantity();
+                od.setOrderQantity(od.getOrderQantity()+newNumberOfUnits);
+                od.setTotal(od.getUnitPrice().multiply(new BigDecimal(od.getOrderQantity())));
+                isCOnsolidated=true;
+            }
+        }
+        return isCOnsolidated;
     }
 
 }

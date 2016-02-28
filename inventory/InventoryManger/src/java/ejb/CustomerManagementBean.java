@@ -33,4 +33,9 @@ public class CustomerManagementBean {
          return customers;
      
      }
+     
+     public Customer findById(String id){
+     Customer customer = em.createNamedQuery("Customer.findById", Customer.class).setParameter("id", Integer.parseInt(id)).getSingleResult();
+     return customer;
+     }
  }
