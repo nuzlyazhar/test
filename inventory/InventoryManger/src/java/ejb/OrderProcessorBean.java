@@ -40,9 +40,11 @@ public class OrderProcessorBean {
             i.setUnitsInStock(i.getUnitsInStock() - od.getOrderQantity());
             itemManagementBean.createItem(i);
             od.setItemId(i);
-            createOrder(order);
+            
 
         }
+        
+        createOrder(order);
 
     }
 
