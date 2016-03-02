@@ -39,6 +39,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Item.findByQuanityPerUnit", query = "SELECT i FROM Item i WHERE i.quanityPerUnit = :quanityPerUnit"),
     
     @NamedQuery(name = "Item.findByUnitsInStock", query = "SELECT i FROM Item i WHERE i.unitsInStock = :unitsInStock"),
+    @NamedQuery(name = "Item.findBelowReorderThreshold", query = "SELECT i FROM Item i WHERE i.unitsInStock <= i.reorderThreshold"),
     @NamedQuery(name = "Item.findByUnitsInOrder", query = "SELECT i FROM Item i WHERE i.unitsInOrder = :unitsInOrder"),
     @NamedQuery(name = "Item.findByReorderThreshold", query = "SELECT i FROM Item i WHERE i.reorderThreshold = :reorderThreshold")})
 public class Item implements Serializable {
@@ -76,9 +77,9 @@ public class Item implements Serializable {
     private Integer unitsInOrder;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 11)
     @Column(name = "reorder_threshold")
-    private String reorderThreshold;
+    private int reorderThreshold;
     @JoinColumn(name = "cat_id", referencedColumnName = "id")
     @ManyToOne
     private Category catId;
@@ -95,7 +96,7 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    public Item(Integer id, String itemName, BigDecimal unitPrice, int quanityPerUnit, int unitsInStock, String reorderThreshold) {
+    public Item(Integer id, String itemName, BigDecimal unitPrice, int quanityPerUnit, int unitsInStock, int reorderThreshold) {
         this.id = id;
         this.itemName = itemName;
         this.unitPrice = unitPrice;
@@ -170,11 +171,11 @@ public class Item implements Serializable {
         this.unitsInOrder = unitsInOrder;
     }
 
-    public String getReorderThreshold() {
+    public int getReorderThreshold() {
         return reorderThreshold;
     }
 
-    public void setReorderThreshold(String reorderThreshold) {
+    public void setReorderThreshold(int reorderThreshold) {
         this.reorderThreshold = reorderThreshold;
     }
 

@@ -6,8 +6,10 @@
 package servlets;
 
 import ejb.CustomerManagementBean;
+import ejb.ItemManagementBean;
 import ejb.UserManagementBean;
 import entity.Customer;
+import entity.Item;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +35,9 @@ public class LoginServlet extends HttpServlet {
     
     @EJB
     CustomerManagementBean customerManagementBean;
+    
+    @EJB
+    ItemManagementBean itemManagementBean;
   
 
     
@@ -59,6 +64,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("logpassword");
         User u = userManagementBean.findByUsername(userName);
         List<Customer> customers = customerManagementBean.findAll();
+        List<Item> alertItems = itemManagementBean.findAllItemsBelowReorderThreshold();
         if (null != u && null != password) {
 
             if (userManagementBean.validateUser(u, password)) {
@@ -69,6 +75,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("user", u);
                     session.setAttribute("logFname", u.getFirstName());
                     session.setAttribute("customers", customers);
+                    session.setAttribute("alertItems", alertItems);
                 }
                 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 rd.include(request, response);

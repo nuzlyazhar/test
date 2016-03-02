@@ -77,7 +77,7 @@ public class CreateItemServlet extends HttpServlet {
         item.setSupId(new Supplier(Integer.parseInt(itemSup)));
         item.setCatId(new Category(Integer.parseInt(itemCat)));
         item.setUnitsInStock(Integer.parseInt(numunits));
-        item.setReorderThreshold(rothreshold);
+        item.setReorderThreshold(Integer.parseInt(rothreshold));
         
         itemManagementBean.createItem(item);
         List<Item> itemsList = itemManagementBean.findAllItems();

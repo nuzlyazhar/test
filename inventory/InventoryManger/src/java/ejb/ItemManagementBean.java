@@ -47,6 +47,12 @@ public class ItemManagementBean {
         return item;
 
     }
+    
+    public List<Item> findAllItemsBelowReorderThreshold() {
+        List<Item> itemsList = em.createNamedQuery("Item.findBelowReorderThreshold", Item.class).getResultList();
+        return itemsList;
+
+    }
 
     public List<Item> searchItems(Item item) {
 

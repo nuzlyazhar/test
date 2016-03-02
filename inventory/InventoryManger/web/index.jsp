@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -157,14 +158,13 @@
       			
       			
       			<div class="col-lg-6 col-md-6 col-sm-12">
-      				<! -- ALERTS EXAMPLES -->
+      				
       				<div class="showback">
-      					<h4><i class="fa fa-angle-right"></i> Alerts Examples</h4>
-							<div class="alert alert-success"><b>Well done!</b> You successfully read this important alert message.</div>
-							<div class="alert alert-info"><b>Heads up!</b> This alert needs your attention, but it's not super important.</div>
-							<div class="alert alert-warning"><b>Warning!</b> Better check yourself, you're not looking too good.</div>
-							<div class="alert alert-danger"><b>Oh snap!</b> Change a few things up and try submitting again.</div>      				
-      				</div><!-- /showback -->
+      					<h4><i class="fa fa-angle-right"></i> Stock Alerts</h4>
+                                         <c:forEach var="item" items="${sessionScope.alertItems}">
+							<div class="alert alert-danger"><b>${item.itemName}</b> Is almost out of stock.</div>
+                                         </c:forEach>
+                              </div><!-- /showback -->
       				
       				<! -- DISMISSABLE ALERT -->
       				<div class="showback">
