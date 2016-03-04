@@ -15,4 +15,8 @@ public class Constants {
     public static String REJECTED = "REJECTED";
     public static String STAFF_ROLE = "STAFF";
     public static String EDIT = "EDIT";
+    
+    public static String HI = "Hi ";
+    public static String APPROVL_EMAIL_SUBJECT = "Your registration has been approved by admin.";
+    public static String APPROVAL_EMAIL_CONTENT = ", Your registration is completed. You may login using your user name and password.";
 }

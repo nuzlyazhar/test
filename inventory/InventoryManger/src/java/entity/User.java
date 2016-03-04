@@ -66,6 +66,9 @@ public class User implements Serializable {
     @Column(name = "status")
     private String status;
     
+    @Column(name = "email")
+    private String email;
+    
     public User() {
     }
 
@@ -177,5 +180,14 @@ public class User implements Serializable {
     public void setCustomerCollection(Collection<Customer> customerCollection) {
         this.customerCollection = customerCollection;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     
 }

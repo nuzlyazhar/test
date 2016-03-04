@@ -17,6 +17,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utills.Constants;
+import utills.EmailUtils;
 
 /**
  *
@@ -46,7 +48,9 @@ public class AdminApprovalServlet extends HttpServlet {
             throws ServletException, IOException {
         String updatedUserId = request.getParameter("updatedUser");
         System.out.println("updatedUserId :"+updatedUserId);
-        userManagementBean.approveUser(updatedUserId);
+        User approvedUser = userManagementBean.approveUser(updatedUserId);
+        userManagementBean.sendUserEmail(approvedUser);
+        
          List<User> users = userManagementBean.usersPendingApproval();
         request.setAttribute("usersList", users);
         RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");

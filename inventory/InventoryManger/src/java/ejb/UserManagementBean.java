@@ -7,12 +7,16 @@ package ejb;
 
 import entity.User;
 import java.util.List;
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import utills.Constants;
+import utills.EmailUtils;
 
 /**
  *
@@ -63,13 +67,20 @@ public class UserManagementBean {
 
     }
     
-    public void approveUser(String id){
+    public User approveUser(String id){
         User user = em.find(User.class, Integer.valueOf(id));
         user.setStatus(Constants.APPROVED);
         user.setRole(Constants.STAFF_ROLE);
-        em.merge(user);
-        em.flush();;
+        user = em.merge(user);
+        em.flush();
+        return user;
     
+    }
+    @Asynchronous
+    public void sendUserEmail(User approvedUser){
+    
+    String emailText = Constants.HI+approvedUser.getFirstName()+Constants.APPROVAL_EMAIL_CONTENT;
+        EmailUtils.sendEmail(approvedUser.getEmail(), Constants.APPROVL_EMAIL_SUBJECT, emailText);
     }
     
    

@@ -57,12 +57,14 @@ public class RegistrationServlet extends HttpServlet {
        String lname = request.getParameter("lname");
        String uname = request.getParameter("uname");
        String password = request.getParameter("password");
+       String email = request.getParameter("email");
        
        User u = new User();
        u.setFirstName(fname);
        u.setLastName(lname);
        u.setUsername(uname);
        u.setPassword(password);
+       u.setEmail(email);
        
        userManagementBean.createUser(u);
        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
