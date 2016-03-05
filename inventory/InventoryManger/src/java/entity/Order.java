@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -24,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -57,6 +59,9 @@ public class Order implements Serializable {
     private User staffId;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "orderId")
     private Collection<OrderDetail> orderDetailCollection;
+    
+    @Transient
+    private BigDecimal total;
 
     public Order() {
     }
@@ -109,6 +114,16 @@ public class Order implements Serializable {
     public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
         this.orderDetailCollection = orderDetailCollection;
     }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+    
+    
 
     @Override
     public int hashCode() {

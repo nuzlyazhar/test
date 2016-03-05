@@ -103,6 +103,13 @@
                                                     </td>
                                                 </tr>
                                             </c:forEach>
+                                                <tr>
+                                                     <td>  </td>
+                                                    <td>  </td>
+                                                     <td>  </td>
+                                                    <td> Total </td>
+                                                    <td>${sessionScope.sessionOrder.total} </td>
+                                                </tr>
                                     </form>
 
                                     </tbody>

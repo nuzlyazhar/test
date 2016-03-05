@@ -77,7 +77,7 @@ public class Item implements Serializable {
     private Integer unitsInOrder;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 11)
+   
     @Column(name = "reorder_threshold")
     private int reorderThreshold;
     @JoinColumn(name = "cat_id", referencedColumnName = "id")

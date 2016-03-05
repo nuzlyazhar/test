@@ -80,6 +80,7 @@ public class ConsumeOrderServlet extends HttpServlet {
             List<OrderDetail> odList = new ArrayList<>();
             odList.add(od);
             order.setOrderDetailCollection(odList);
+            order.setTotal(od.getTotal());
             session.setAttribute("sessionOrder", order);
             RequestDispatcher rd = request.getRequestDispatcher("order_overview.jsp");
             rd.include(request, response);
@@ -103,6 +104,7 @@ public class ConsumeOrderServlet extends HttpServlet {
             od.setTotal(od.getUnitPrice().multiply(new BigDecimal(noOfUnits)));
             existingOrder.getOrderDetailCollection().add(od);
             }
+            existingOrder.setTotal(calculateOrderTotal(existingOrder));
             session.setAttribute("sessionOrder", existingOrder);
             RequestDispatcher rd = request.getRequestDispatcher("order_overview.jsp");
             rd.include(request, response);
@@ -122,6 +124,14 @@ public class ConsumeOrderServlet extends HttpServlet {
             }
         }
         return isCOnsolidated;
+    }
+    
+    private static BigDecimal calculateOrderTotal(Order order) {
+        BigDecimal total = new BigDecimal("0.00");
+        for (OrderDetail od : order.getOrderDetailCollection()) {
+            total = total.add(od.getTotal());
+        }
+        return total;
     }
 
 }
