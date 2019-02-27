@@ -1,6 +1,7 @@
 package com.excelian.diginexserver.web.rest;
 
 
+import com.excelian.diginexserver.domain.UserDetails;
 import com.excelian.diginexserver.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.openapitools.client.model.ProfileResource;
@@ -14,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class PassfortProfileController {
 
-
     static final int DEFAULT_PAGE_SIZE = 10;
-
 
     private ProfileService profileService;
 
@@ -25,14 +24,14 @@ public class PassfortProfileController {
         this.profileService = profileService;
     }
 
-    @GetMapping(value = "/profile", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/profile", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
             value = "Create Profile",
-            notes = "creates a profile in passfort",
+            notes = "Creates a Profile in PassFort",
             response = ProfileResource.class)
-    public ProfileResource createProfile() {
+    public ProfileResource createProfile(@RequestBody UserDetails userDetails) {
 
-        ProfileResource profileResource = profileService.createProfile();
+        ProfileResource profileResource = profileService.createProfile(userDetails);
 
         return profileResource;
     }
