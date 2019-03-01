@@ -5,18 +5,20 @@ import com.excelian.diginexserver.domain.UserDetails;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.openapitools.client.api.ProfilesApi;
 import org.openapitools.client.model.ProfileResource;
 import org.openapitools.client.model.Role;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-//@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
 public class ProfileServiceTest {
 
     private ApplicationProperties appProperties;

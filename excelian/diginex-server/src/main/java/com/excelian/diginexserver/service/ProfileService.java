@@ -6,6 +6,7 @@ import org.openapitools.client.ApiClient;
 import org.openapitools.client.api.ProfilesApi;
 import org.openapitools.client.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -33,6 +34,14 @@ public class ProfileService {
 
         ProfileResource profileResource = api.profilesPost(newProfile);
         return profileResource;
+    }
+
+    public ProfileSearchResults getProfile(String givenName){
+        ProfilesApi api = new ApiClient(appProperties.getAuthName(),appProperties.getApiKey()).buildClient(ProfilesApi.class);
+
+        ProfileSearchResults profileResource =  api.profilesGet(givenName, 1, null, null);
+        return profileResource;
+
     }
 
     ProfileResource createProfileResource(UserDetails userDetails) {

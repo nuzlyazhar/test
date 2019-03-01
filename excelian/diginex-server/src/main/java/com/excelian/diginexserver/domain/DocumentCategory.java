@@ -1,0 +1,7 @@
+package com.excelian.diginexserver.domain;
+
+public enum DocumentCategory {
+    
+    PROOF_OF_IDENTITY, PROOF_OF_SOURCE_OF_WEALTH, PROOF_OF_SOURCE_OF_FUNDS, PROOF_OF_ADDRESS, SUPPORTING,
+    COMPANY_FILING, DATA_SUMMARY, PROOF_OF_BANK_ACCOUNT, PROOF_OF_TAX_STATUS
+}
